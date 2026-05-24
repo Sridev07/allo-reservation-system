@@ -3,21 +3,36 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.product.create({
+  // Product
+  const product =
+    await prisma.product.create({
+      data: {
+        name: "Test Product",
+      },
+    });
+
+  // Warehouse
+  const warehouse =
+    await prisma.warehouse.create({
+      data: {
+        name: "Main Warehouse",
+        location: "NYC",
+      },
+    });
+
+  // Inventory
+  await prisma.inventory.create({
     data: {
-      name: "Test Product",
-      stock: 100,
+      productId: product.id,
+      warehouseId: warehouse.id,
+      totalQuantity: 100,
+      reservedQuantity: 0,
     },
   });
 
-  await prisma.warehouse.create({
-    data: {
-      name: "Main Warehouse",
-      location: "NYC",
-    },
-  });
-
-  console.log("Seeded successfully");
+  console.log(
+    "Seeded successfully"
+  );
 }
 
 main()
