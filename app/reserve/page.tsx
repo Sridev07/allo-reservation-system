@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   ShoppingCart,
@@ -10,7 +10,7 @@ import {
   Package,
 } from "lucide-react";
 
-export default function ReservePage() {
+function ReserveContent() {
   const searchParams = useSearchParams();
 
   const productId = searchParams.get("productId");
@@ -236,7 +236,6 @@ export default function ReservePage() {
                 className="bg-green-500 hover:bg-green-400 transition-all duration-200 rounded-2xl py-5 font-bold text-lg flex items-center justify-center gap-3 shadow-lg shadow-green-500/20"
               >
                 <CheckCircle2 size={24} />
-
                 Confirm Purchase
               </button>
 
@@ -245,7 +244,6 @@ export default function ReservePage() {
                 className="bg-red-500 hover:bg-red-400 transition-all duration-200 rounded-2xl py-5 font-bold text-lg flex items-center justify-center gap-3 shadow-lg shadow-red-500/20"
               >
                 <XCircle size={24} />
-
                 Cancel Reservation
               </button>
             </div>
@@ -262,5 +260,13 @@ export default function ReservePage() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function ReservePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ReserveContent />
+    </Suspense>
   );
 }
