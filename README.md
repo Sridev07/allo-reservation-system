@@ -106,3 +106,6 @@ Confirm Reservation
 POST /api/reservations/:id/confirm
 Cancel Reservation
 POST /api/reservations/:id/cancel
+
+Deployment:vercel
+URL:https://allo-reservation-system-one-xi.vercel.app
