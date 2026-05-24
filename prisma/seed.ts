@@ -16,7 +16,6 @@ async function main() {
     await prisma.warehouse.create({
       data: {
         name: "Main Warehouse",
-        location: "NYC",
       },
     });
 
